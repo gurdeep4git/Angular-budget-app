@@ -1,0 +1,33 @@
+<ng-container *ngIf="transactions$ | async as transactions">
+    <div class="list-holder">
+        <ng-container *ngIf="transactions.length > 0; else emptyView">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="title">Income</p>
+                        <ul class="list-group">
+                            <li *ngFor="let transaction of incomeTransactions"
+                                class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>{{transaction.description}}</span>
+                                <span class="amount income">+ {{transaction.amount}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <p class="title">Expense</p>
+                        <ul class="list-group">
+                            <li *ngFor="let transaction of expenseTransactions"
+                                class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>{{transaction.description}}</span>
+                                <span class="amount expense">- {{transaction.amount}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #emptyView>
+            <p class="text-center">No Transactions yet!!!</p>
+        </ng-template>
+    </div>
+</ng-container>
