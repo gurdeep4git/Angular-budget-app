@@ -2,8 +2,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
-                <p>Available budget in December 2020</p>
-                <p class="balance">{{transactionSummary.balance}}</p>
+                <p>Available budget in <span class="font-weight-bold">{{currentDate | date:'LLLL yyyy'}}</span></p>
+                <ng-template [ngIf]="transactionSummary.balance > 0">
+                    <p class="balance income">+ {{transactionSummary.balance}} &#8377;</p>
+                </ng-template>
+                <ng-template [ngIf]="transactionSummary.balance < 0">
+                    <p class="balance expense">{{transactionSummary.balance}} &#8377;</p>
+                </ng-template>
+                <ng-template [ngIf]="transactionSummary.balance === 0">
+                    <p class="balance">{{transactionSummary.balance}} &#8377;</p>
+                </ng-template>
                 <div class="total-amount mb-3 income d-flex justify-content-between">
                     <span>Income</span>
                     <span>+ {{transactionSummary.totalIncome}}</span>

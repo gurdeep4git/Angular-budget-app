@@ -11,7 +11,7 @@ export class TransactionService {
 
     transactionsSummary$ = new BehaviorSubject<TransactionSummary>(new TransactionSummary());
 
-    transactionsSource$ = new BehaviorSubject<Transaction[]>(
+    private transactionsSource$ = new BehaviorSubject<Transaction[]>(
         // [
         //     { id: 1, type: 1, description: "Test", amount: 1000 }
         // ]
@@ -38,6 +38,16 @@ export class TransactionService {
             tap(transactions => this.updateTransactionSummary(transactions))
         ).subscribe(transactions => {
             this.transactionsSource$.next(transactions);
+        });
+    }
+
+    public deleteTransaction(id: number): void {
+        this.transactions$.pipe(
+            take(1),
+        ).subscribe(transactions => {
+            const filtered = transactions.filter(t => t.id !== id);
+            this.updateTransactionSummary(filtered)
+            this.transactionsSource$.next(filtered);
         });
     }
 

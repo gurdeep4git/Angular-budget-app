@@ -13,6 +13,7 @@ export class TransactionFormComponent implements OnInit {
   constructor(private tService: TransactionService, private fb: FormBuilder,) { }
 
   transactionForm: FormGroup;
+  submitted: boolean = false;
 
   ngOnInit(): void {
     this.initForm();
@@ -26,7 +27,18 @@ export class TransactionFormComponent implements OnInit {
     });
   }
 
+  get transactionFormControl() {
+    return this.transactionForm.controls;
+  }
+
   transactionSubmit(): void {
+    this.submitted = true;
+
+    console.log(this.transactionForm);
+    if (this.transactionForm.invalid) {
+      return;
+    }
+
 
     const transaction = new Transaction();
     transaction.id = Number(Math.floor(Math.random() * 100));
@@ -36,7 +48,12 @@ export class TransactionFormComponent implements OnInit {
 
     this.tService.addTransaction(transaction);
 
-    this.transactionForm.reset();
+    this.reset();
   }
 
+
+  private reset() {
+    this.submitted = false;
+    this.transactionForm.reset();
+  }
 }

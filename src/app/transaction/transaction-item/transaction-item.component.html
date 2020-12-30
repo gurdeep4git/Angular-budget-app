@@ -1,0 +1,12 @@
+<li class="list-group-item d-flex justify-content-between align-items-center">
+    <span>{{transaction.description}}</span>
+    <ng-template [ngIf]="transaction.type === transactionType.Income">
+        <span class="amount income">+ {{transaction.amount}} &#8377;</span>
+    </ng-template>
+    <ng-template [ngIf]="transaction.type === transactionType.Expense">
+        <span class="amount expense">- {{transaction.amount}} &#8377;</span>
+    </ng-template>
+    <div class="delete-container" (click)="onDelete(transaction.id)">
+        <span>X</span>
+    </div>
+</li>

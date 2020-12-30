@@ -8,6 +8,12 @@
 
     .balance{
         font-size: 44px;
+        &.income{
+            color: #28B9B5;
+        }
+        &.expense{
+            color: #ff5049;
+        }
     }
 
     .total-amount{
@@ -40,4 +46,26 @@
             color: #ff5049;
         } 
     }
+
+    .list-group-item{
+        position: relative;
+        &:hover .delete-container{
+            display: block;
+        }
+        .delete-container{
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 30px;
+            height: 30px;
+            background-color: #2d2d2d;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+        }    
+    }
+    
 }

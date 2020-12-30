@@ -10,22 +10,21 @@ import { TransactionService } from '../transaction.service';
 })
 export class TransactionSummaryComponent implements OnInit, OnDestroy {
 
-  subscription: Subscription;
+  subscriptionOnInit: Subscription;
+  subscriptionOnAfterViewInit: Subscription;
   transactionSummary: TransactionSummary;
+  currentDate = new Date();
 
   constructor(private tService: TransactionService) { }
 
   ngOnInit(): void {
-    // this.subscription.push(this.tService.getTransactions().subscribe(transactions => {
-    //   this.tService.updateTransactionSummary(transactions);
-    // }));
-
-    this.subscription = this.tService.transactionsSummary$.subscribe(summary => {
+    this.subscriptionOnInit = this.tService.transactionsSummary$.subscribe(summary => {
       this.transactionSummary = summary;
     });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscriptionOnInit.unsubscribe();
+    this.subscriptionOnAfterViewInit.unsubscribe();
   }
 }

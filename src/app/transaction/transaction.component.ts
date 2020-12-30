@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
-import { filter, toArray } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { TransactionType } from '../enums';
 import { Transaction } from '../models';
 import { TransactionService } from '../transaction.service';
 
@@ -23,14 +23,9 @@ export class TransactionComponent implements OnInit, OnDestroy {
 
     this.subscription = this.transactions$
       .subscribe(x => {
-        this.incomeTransactions = x.filter(t => t.type === 1);
-        this.expenseTransactions = x.filter(t => t.type === -1);
+        this.incomeTransactions = x.filter(t => t.type === TransactionType.Income);
+        this.expenseTransactions = x.filter(t => t.type === TransactionType.Expense);
       });
-
-    // this.subscription = this.tService.getTransactions().subscribe(x => {
-    //   this.incomeTransactions = x.filter(t => t.type === 1);
-    //   this.expenseTransactions = x.filter(t => t.type === -1);
-    // });  
   }
 
   ngOnDestroy(): void {

@@ -4,23 +4,19 @@
             <div class="container">
                 <div class="row">
                     <div class="col-6">
-                        <p class="title">Income</p>
+                        <p class="title">{{'Income' | uppercase}}</p>
                         <ul class="list-group">
-                            <li *ngFor="let transaction of incomeTransactions"
-                                class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>{{transaction.description}}</span>
-                                <span class="amount income">+ {{transaction.amount}}</span>
-                            </li>
+                            <ng-container *ngFor="let transaction of incomeTransactions">
+                                <app-transaction-item [transaction]="transaction"></app-transaction-item>
+                            </ng-container>
                         </ul>
                     </div>
                     <div class="col-6">
-                        <p class="title">Expense</p>
+                        <p class="title">{{'Expense' | uppercase}}</p>
                         <ul class="list-group">
-                            <li *ngFor="let transaction of expenseTransactions"
-                                class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>{{transaction.description}}</span>
-                                <span class="amount expense">- {{transaction.amount}}</span>
-                            </li>
+                            <ng-container *ngFor="let transaction of expenseTransactions">
+                                <app-transaction-item [transaction]="transaction"></app-transaction-item>
+                            </ng-container>
                         </ul>
                     </div>
                 </div>

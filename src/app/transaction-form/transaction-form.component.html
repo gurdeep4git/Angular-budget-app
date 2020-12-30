@@ -5,22 +5,37 @@
                 <form [formGroup]="transactionForm" (ngSubmit)="transactionSubmit()">
                     <div class="row">
                         <div class="col-2">
-                            <select formControlName="type" class="form-control">
-                                <option value="0">--Select--</option>
+                            <select formControlName="type" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && transactionFormControl.type.errors }">
+                                <option [selected]="true" value="0">--Select--</option>
                                 <option value="1">Income</option>
                                 <option value="-1">Expense</option>
                             </select>
+                            <div *ngIf="submitted && transactionFormControl.type.errors" class="invalid-feedback">
+                                <div *ngIf="transactionFormControl.type.errors.required">Type is required
+                                </div>
+                            </div>
                         </div>
                         <div class="col-7">
                             <input formControlName="description" class="form-control" type="text"
-                                placeholder="Add Decription..." />
+                                [ngClass]="{ 'is-invalid': submitted && transactionFormControl.description.errors }"
+                                placeholder="Add Description..." />
+                            <div *ngIf="submitted && transactionFormControl.description.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="transactionFormControl.description.errors.required">Description is required
+                                </div>
+                            </div>
                         </div>
                         <div class="col-2">
-                            <input formControlName="amount" class="form-control" type="text" placeholder="Amount" />
+                            <input formControlName="amount" class="form-control" type="text" placeholder="Amount"
+                                [ngClass]="{ 'is-invalid': submitted && transactionFormControl.amount.errors }" />
+                            <div *ngIf="submitted && transactionFormControl.amount.errors" class="invalid-feedback">
+                                <div *ngIf="transactionFormControl.amount.errors.required">Amount is required</div>
+                                <div *ngIf="transactionFormControl.amount.errors.pattern">Enter numbers only</div>
+                            </div>
                         </div>
-                        <div class="col-1">
-                            <input class="btn btn-primary" type="submit" value="Submit"
-                                [disabled]="!transactionForm.valid" />
+                        <div class=" col-1">
+                            <input class="btn btn-primary" type="submit" value="Submit" />
                         </div>
                     </div>
                 </form>

@@ -7,12 +7,14 @@ import { TransactionFormComponent } from './transaction-form/transaction-form.co
 import { TransactionComponent } from './transaction/transaction.component';
 import { TransactionService } from "./transaction.service";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TransactionItemComponent } from './transaction/transaction-item/transaction-item.component';
 @NgModule({
   declarations: [
     AppComponent,
     TransactionSummaryComponent,
     TransactionFormComponent,
-    TransactionComponent
+    TransactionComponent,
+    TransactionItemComponent
   ],
   imports: [
     BrowserModule,
